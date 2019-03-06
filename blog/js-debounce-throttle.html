@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>js 防抖节流 | 雄大家</title>
+    <meta name="description" content="防抖与节流函数是一种最常用的 高频触发优化方式，能对性能有较大的帮助。这里不在介绍使用场景，这里只是纯展示代码理解">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d26378bb.css" as="style"><link rel="preload" href="/assets/js/app.6a1c7d67.js" as="script"><link rel="preload" href="/assets/js/2.63e202d5.js" as="script"><link rel="preload" href="/assets/js/27.be5d5f2c.js" as="script"><link rel="prefetch" href="/assets/js/10.45b3122b.js"><link rel="prefetch" href="/assets/js/11.ef1e40ed.js"><link rel="prefetch" href="/assets/js/12.fd10a6de.js"><link rel="prefetch" href="/assets/js/13.deeea89e.js"><link rel="prefetch" href="/assets/js/14.2750bbe8.js"><link rel="prefetch" href="/assets/js/15.3699038f.js"><link rel="prefetch" href="/assets/js/16.47b9f8b3.js"><link rel="prefetch" href="/assets/js/17.725f6bb8.js"><link rel="prefetch" href="/assets/js/18.b0157e81.js"><link rel="prefetch" href="/assets/js/19.6c67f5dc.js"><link rel="prefetch" href="/assets/js/20.0e515db8.js"><link rel="prefetch" href="/assets/js/21.43d7f922.js"><link rel="prefetch" href="/assets/js/22.dfea0c59.js"><link rel="prefetch" href="/assets/js/23.c3bc28d6.js"><link rel="prefetch" href="/assets/js/24.57db548b.js"><link rel="prefetch" href="/assets/js/25.e2e9ffd9.js"><link rel="prefetch" href="/assets/js/26.e61851e1.js"><link rel="prefetch" href="/assets/js/28.ef903b6a.js"><link rel="prefetch" href="/assets/js/29.d65ee59a.js"><link rel="prefetch" href="/assets/js/3.018261d8.js"><link rel="prefetch" href="/assets/js/30.862d472d.js"><link rel="prefetch" href="/assets/js/31.a903b7be.js"><link rel="prefetch" href="/assets/js/32.17604038.js"><link rel="prefetch" href="/assets/js/33.b403c19c.js"><link rel="prefetch" href="/assets/js/34.2df7b623.js"><link rel="prefetch" href="/assets/js/35.04c1b42c.js"><link rel="prefetch" href="/assets/js/36.5775796d.js"><link rel="prefetch" href="/assets/js/37.6847ce80.js"><link rel="prefetch" href="/assets/js/38.956dd45b.js"><link rel="prefetch" href="/assets/js/39.d47fb572.js"><link rel="prefetch" href="/assets/js/4.539838e3.js"><link rel="prefetch" href="/assets/js/40.a460de13.js"><link rel="prefetch" href="/assets/js/41.5ad88ba8.js"><link rel="prefetch" href="/assets/js/42.a4740b36.js"><link rel="prefetch" href="/assets/js/43.22b59fb2.js"><link rel="prefetch" href="/assets/js/44.48fcb2a1.js"><link rel="prefetch" href="/assets/js/45.88b2df56.js"><link rel="prefetch" href="/assets/js/46.a4c14c43.js"><link rel="prefetch" href="/assets/js/47.ea4798bc.js"><link rel="prefetch" href="/assets/js/48.0cd6076d.js"><link rel="prefetch" href="/assets/js/49.13df7e3e.js"><link rel="prefetch" href="/assets/js/5.9f59a17f.js"><link rel="prefetch" href="/assets/js/50.6d65c345.js"><link rel="prefetch" href="/assets/js/51.06f54f5d.js"><link rel="prefetch" href="/assets/js/52.c91d91d2.js"><link rel="prefetch" href="/assets/js/53.de3c77b4.js"><link rel="prefetch" href="/assets/js/54.68e5267a.js"><link rel="prefetch" href="/assets/js/55.c852d2ba.js"><link rel="prefetch" href="/assets/js/56.d69fbe04.js"><link rel="prefetch" href="/assets/js/57.b45b29c6.js"><link rel="prefetch" href="/assets/js/58.69f6c5d4.js"><link rel="prefetch" href="/assets/js/59.43ab7236.js"><link rel="prefetch" href="/assets/js/6.04b98662.js"><link rel="prefetch" href="/assets/js/7.4446acf3.js"><link rel="prefetch" href="/assets/js/8.00ec34fe.js"><link rel="prefetch" href="/assets/js/9.a50c4a40.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d26378bb.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">雄大家</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">参考</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.h5anli.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  H5案例
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-weibo</a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-cms</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">MEME</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">参考</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.h5anli.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  H5案例
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-weibo</a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-cms</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">MEME</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>js 防抖节流</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/js-debounce-throttle.html#开始实现-debounce" class="sidebar-link">开始实现 debounce</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/js-debounce-throttle.html#开始实现-throttle" class="sidebar-link">开始实现 throttle</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content default"><div class="tip custom-block"><p class="custom-block-title">防抖和节流的作用都是防止函数多次调用。</p> <p>区别在于，
+假设一个用户一直触发这个函数，
+且每次触发函数的间隔小于wait，
+防抖的情况下不会触发并从新计算wait时间，直到空闲时间大于await，
+节流函数上次执行时间 空闲大于await就会执行。</p></div> <h2 id="开始实现-debounce"><a href="#开始实现-debounce" aria-hidden="true" class="header-anchor">#</a> 开始实现 <code>debounce</code></h2> <p>通过<code>inited</code>来控制是否需要在debounce之前执行一次<code>func</code></p> <p>每一次执行<code>debounce</code>的时候通过清除定时器</p> <p>好比上电梯，只要外面源源不断的人进入电梯，电梯就不会关闭往上走，必须等人全部进入以后才会向上运行</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lodash 1.2.1</span>
+<span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> wait<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> args<span class="token punctuation">,</span>
+        result<span class="token punctuation">,</span>
+        thisArg<span class="token punctuation">,</span>
+        trailing <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        inited<span class="token punctuation">,</span>
+        timeId<span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">delayed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        inited <span class="token operator">=</span> timeId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>traling<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            result <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Object]'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        leading <span class="token operator">=</span> options<span class="token punctuation">.</span>leading <span class="token punctuation">:</span> leading<span class="token punctuation">;</span>
+        trailing <span class="token operator">=</span> options<span class="token punctuation">.</span>trailing <span class="token punctuation">:</span> trailing<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        args <span class="token operator">=</span> arguments<span class="token punctuation">;</span>
+        thisArg <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timeId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>inited <span class="token operator">&amp;&amp;</span> leading<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            inited <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            result <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            timeId <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>delayed<span class="token punctuation">,</span> wait<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="开始实现-throttle"><a href="#开始实现-throttle" aria-hidden="true" class="header-anchor">#</a> 开始实现 <code>throttle</code></h2> <p>每隔一段时间必须执行一次</p> <p>也比如上电梯，如果在某一个楼层等待超时以后，电梯就会发出报警信息提示必须关闭电梯门</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lodash 1.2.1</span>
+<span class="token keyword">function</span> <span class="token function">throttle</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> wait<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> args<span class="token punctuation">,</span>
+        result<span class="token punctuation">,</span>
+        thisArg<span class="token punctuation">,</span>
+        timeId<span class="token punctuation">,</span>
+        lastCalled <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        leading <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trailing <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">function</span> <span class="token function">trailingCall</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        timeId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>trailing<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            lastCalled <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">;</span>
+            result <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Object]'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        leading <span class="token operator">=</span> options<span class="token punctuation">.</span>leading <span class="token punctuation">:</span> leading<span class="token punctuation">;</span>
+        trailing <span class="token operator">=</span> options<span class="token punctuation">.</span>trailing <span class="token punctuation">:</span> trailing<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> now <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>timeId <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>leading<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            lastCalled <span class="token operator">=</span> now<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">var</span> remaining <span class="token operator">=</span> wait <span class="token operator">-</span> <span class="token punctuation">(</span>now <span class="token operator">-</span> lastCalled<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        args <span class="token operator">=</span> arguments<span class="token punctuation">;</span>
+        thisArg <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>remaining <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timeId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          timeId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+          lastCalled <span class="token operator">=</span> now<span class="token punctuation">;</span>
+          result <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>timeId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          timeId <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>trailingCall<span class="token punctuation">,</span> remaining<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lodash 4.11 书写还不完善</span>
+<span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> wait<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> lastArgs<span class="token punctuation">,</span> <span class="token comment">// 入参</span>
+        lastThis<span class="token punctuation">,</span> <span class="token comment">// 作用域</span>
+        maxWait<span class="token punctuation">,</span> <span class="token comment">// 最大等待时间</span>
+        result<span class="token punctuation">,</span> <span class="token comment">// 返回值</span>
+        timerId<span class="token punctuation">,</span> <span class="token comment">// 定时器对象</span>
+        lastCallTime <span class="token comment">// 上一次调用debounce函数时间</span>
+
+    <span class="token keyword">let</span> lastInvokeTime <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// 上一次执行func函数时间</span>
+    <span class="token keyword">let</span> leading <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment">// 是否立即出发func函数</span>
+    <span class="token keyword">let</span> maxing <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment">// 是否存在最大等待时间</span>
+    <span class="token keyword">let</span> trailing <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment">// 是否在等待周期结束以后执行func</span>
+
+    <span class="token comment">// Bypass `requestAnimationFrame` by explicitly setting `wait=0`.</span>
+    <span class="token comment">// const useRAF = (!wait &amp;&amp; wait !== 0 &amp;&amp; typeof root.requestAnimationFrame === 'function')</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> func <span class="token operator">!==</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'Expected a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    wait <span class="token operator">=</span> <span class="token operator">+</span>wait <span class="token operator">||</span> <span class="token number">0</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Object<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Object]'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        leading <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span>options<span class="token punctuation">.</span>leading
+        maxing <span class="token operator">=</span> <span class="token string">'maxWait'</span> <span class="token keyword">in</span> options
+        maxWait <span class="token operator">=</span> maxing <span class="token operator">?</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">+</span>options<span class="token punctuation">.</span>maxWait <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">,</span> wait<span class="token punctuation">)</span> <span class="token punctuation">:</span> maxWait
+        trailing <span class="token operator">=</span> <span class="token string">'trailing'</span> <span class="token keyword">in</span> options <span class="token operator">?</span> <span class="token operator">!</span><span class="token operator">!</span>options<span class="token punctuation">.</span>trailing <span class="token punctuation">:</span> trailing
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> args <span class="token operator">=</span> lastArgs
+        <span class="token keyword">const</span> thisArg <span class="token operator">=</span> lastThis
+
+        lastArgs <span class="token operator">=</span> lastThis <span class="token operator">=</span> undefined
+        lastInvokeTime <span class="token operator">=</span> time
+        result <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>thisArg<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> result
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>pendingFunc<span class="token punctuation">,</span> wait<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// if (useRAF) {</span>
+        <span class="token comment">// root.cancelAnimationFrame(timerId);</span>
+        <span class="token comment">// return root.requestAnimationFrame(pendingFunc)</span>
+        <span class="token comment">// }</span>
+        <span class="token keyword">return</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>pendingFunc<span class="token punctuation">,</span> wait<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">cancelTimer</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// if (useRAF) {</span>
+        <span class="token comment">// return root.cancelAnimationFrame(id)</span>
+        <span class="token comment">// }</span>
+        <span class="token function">clearTimeout</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">leadingEdge</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Reset any `maxWait` timer.</span>
+        lastInvokeTime <span class="token operator">=</span> time
+        <span class="token comment">// Start the timer for the trailing edge.</span>
+        timerId <span class="token operator">=</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>timerExpired<span class="token punctuation">,</span> wait<span class="token punctuation">)</span>
+        <span class="token comment">// Invoke the leading edge.</span>
+        <span class="token keyword">return</span> leading <span class="token operator">?</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">:</span> result
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">remainingWait</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> timeSinceLastCall <span class="token operator">=</span> time <span class="token operator">-</span> lastCallTime
+        <span class="token keyword">const</span> timeSinceLastInvoke <span class="token operator">=</span> time <span class="token operator">-</span> lastInvokeTime
+        <span class="token keyword">const</span> timeWaiting <span class="token operator">=</span> wait <span class="token operator">-</span> timeSinceLastCall
+
+        <span class="token keyword">return</span> maxing
+        <span class="token operator">?</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>timeWaiting<span class="token punctuation">,</span> maxWait <span class="token operator">-</span> timeSinceLastInvoke<span class="token punctuation">)</span>
+        <span class="token punctuation">:</span> timeWaiting
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">shouldInvoke</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> timeSinceLastCall <span class="token operator">=</span> time <span class="token operator">-</span> lastCallTime
+        <span class="token keyword">const</span> timeSinceLastInvoke <span class="token operator">=</span> time <span class="token operator">-</span> lastInvokeTime
+
+        <span class="token comment">// Either this is the first call, activity has stopped and we're at the</span>
+        <span class="token comment">// trailing edge, the system time has gone backwards and we're treating</span>
+        <span class="token comment">// it as the trailing edge, or we've hit the `maxWait` limit.</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>lastCallTime <span class="token operator">===</span> undefined <span class="token operator">||</span> <span class="token punctuation">(</span>timeSinceLastCall <span class="token operator">&gt;=</span> wait<span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token punctuation">(</span>timeSinceLastCall <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>maxing <span class="token operator">&amp;&amp;</span> timeSinceLastInvoke <span class="token operator">&gt;=</span> maxWait<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">timerExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> time <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldInvoke</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">trailingEdge</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// Restart the timer.</span>
+        timerId <span class="token operator">=</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>timerExpired<span class="token punctuation">,</span> <span class="token function">remainingWait</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">trailingEdge</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        timerId <span class="token operator">=</span> undefined
+
+        <span class="token comment">// Only invoke if we have `lastArgs` which means `func` has been</span>
+        <span class="token comment">// debounced at least once.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>trailing <span class="token operator">&amp;&amp;</span> lastArgs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        lastArgs <span class="token operator">=</span> lastThis <span class="token operator">=</span> undefined
+        <span class="token keyword">return</span> result
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timerId <span class="token operator">!==</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">cancelTimer</span><span class="token punctuation">(</span>timerId<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        lastInvokeTime <span class="token operator">=</span> <span class="token number">0</span>
+        lastArgs <span class="token operator">=</span> lastCallTime <span class="token operator">=</span> lastThis <span class="token operator">=</span> timerId <span class="token operator">=</span> undefined
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> timerId <span class="token operator">===</span> undefined <span class="token operator">?</span> result <span class="token punctuation">:</span> <span class="token function">trailingEdge</span><span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">pending</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> timerId <span class="token operator">!==</span> undefined
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">debounced</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> time <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">const</span> isInvoking <span class="token operator">=</span> <span class="token function">shouldInvoke</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span>
+
+        lastArgs <span class="token operator">=</span> args
+        lastThis <span class="token operator">=</span> <span class="token keyword">this</span>
+        lastCallTime <span class="token operator">=</span> time
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>isInvoking<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timerId <span class="token operator">===</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">leadingEdge</span><span class="token punctuation">(</span>lastCallTime<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxing<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// Handle invocations in a tight loop.</span>
+            timerId <span class="token operator">=</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>timerExpired<span class="token punctuation">,</span> wait<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span>lastCallTime<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timerId <span class="token operator">===</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        timerId <span class="token operator">=</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>timerExpired<span class="token punctuation">,</span> wait<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result
+    <span class="token punctuation">}</span>
+    debounced<span class="token punctuation">.</span>cancel <span class="token operator">=</span> cancel
+    debounced<span class="token punctuation">.</span>flush <span class="token operator">=</span> flush
+    debounced<span class="token punctuation">.</span>pending <span class="token operator">=</span> pending
+    <span class="token keyword">return</span> debounced
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> wait<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> lastArgs<span class="token punctuation">,</span> <span class="token comment">// 参数</span>
+        lastThis<span class="token punctuation">,</span> <span class="token comment">// 作用域</span>
+        timerId<span class="token punctuation">,</span> <span class="token comment">// 定时器对象</span>
+        lastCallTime <span class="token comment">// 触发事件时间戳</span>
+
+    <span class="token keyword">let</span> leading <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment">// 是否立即执行一次</span>
+    <span class="token keyword">let</span> trailing <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment">// 延迟时间到了以后是否执行一次</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> func <span class="token operator">!==</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'Expected a function'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    wait <span class="token operator">=</span> <span class="token operator">+</span>wait <span class="token operator">||</span> <span class="token number">0</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Object<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Object]'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        leading <span class="token operator">=</span> <span class="token string">'leading'</span> <span class="token keyword">in</span> options <span class="token operator">?</span> <span class="token operator">!</span><span class="token operator">!</span>options<span class="token punctuation">.</span>leading <span class="token punctuation">:</span> leading
+        trailing <span class="token operator">=</span> <span class="token string">'trailing'</span> <span class="token keyword">in</span> options <span class="token operator">?</span> <span class="token operator">!</span><span class="token operator">!</span>options<span class="token punctuation">.</span>trailing <span class="token punctuation">:</span> trailing
+    <span class="token punctuation">}</span>
+    <span class="token keyword">function</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// func函数执行 </span>
+        func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>lastThis<span class="token punctuation">,</span> lastArgs<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>pendingFunc<span class="token punctuation">,</span> wait<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 启动定时器</span>
+        <span class="token keyword">return</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>pendingFunc<span class="token punctuation">,</span> wait<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">leadingEdge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 开启定时器</span>
+        timerId <span class="token operator">=</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>timerExpired<span class="token punctuation">,</span> wait<span class="token punctuation">)</span>
+        <span class="token comment">// 是否是在函数调用之前启动一次</span>
+        <span class="token keyword">return</span> leading <span class="token operator">?</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> undefined
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">remainingWait</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 剩余等待时间</span>
+        <span class="token comment">// 定时器回调函数结束时间 - 上一次用户触发debounced事件的时间</span>
+        <span class="token keyword">const</span> timeSinceLastCall <span class="token operator">=</span> time <span class="token operator">-</span> lastCallTime
+        <span class="token comment">// wait - </span>
+        <span class="token keyword">const</span> timeWaiting <span class="token operator">=</span> wait <span class="token operator">-</span> timeSinceLastCall
+
+        <span class="token keyword">return</span> timeWaiting
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">shouldInvoke</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 调用func函数的判定条件【开关】</span>
+        <span class="token comment">// time 定时器回掉函数执行开始时间 lastCallTime 上一次用户触发debounced时间</span>
+        <span class="token keyword">const</span> timeSinceLastCall <span class="token operator">=</span> time <span class="token operator">-</span> lastCallTime
+        <span class="token comment">// 用户只触发一次debounced 返回 true lastCallTime === undefined</span>
+        <span class="token comment">// 用户停止触发debounced  返回 true timeSinceLastCall &gt;= wait</span>
+        <span class="token comment">// 系统时间倒退了 返回 true timeSinceLastCall &lt; 0</span>
+        <span class="token keyword">return</span> timeSinceLastCall <span class="token operator">&gt;=</span> wait
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">timerExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//  定时器的回调函数 ,用来判断触法事件的时间差</span>
+        <span class="token keyword">const</span> time <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldInvoke</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">trailingEdge</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// Restart the timer.</span>
+        timerId <span class="token operator">=</span> <span class="token function">startTimer</span><span class="token punctuation">(</span>timerExpired<span class="token punctuation">,</span> <span class="token function">remainingWait</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token function">trailingEdge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        timerId <span class="token operator">=</span> undefined <span class="token comment">// 重置定时器对象</span>
+        <span class="token comment">// 只有当我们有`lastArgs`时才会调用，这意味着`func`至少已被去抖过一次。[执行过denounced函数]</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>trailing <span class="token operator">&amp;&amp;</span> lastArgs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">invokeFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">function</span> <span class="token function">debounced</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 要返回的函数</span>
+        <span class="token keyword">const</span> time <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 用户触发事件的时间</span>
+
+        lastArgs <span class="token operator">=</span> args  <span class="token comment">// 入参</span>
+        lastThis <span class="token operator">=</span> <span class="token keyword">this</span> <span class="token comment">// 作用域</span>
+        lastCallTime <span class="token operator">=</span> time <span class="token comment">// 将用户触发事件的时间赋值给lastCalltime，即上一次调用debounced时间</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timerId <span class="token operator">===</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">leadingEdge</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> debounced
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/js-number-format.html" class="prev">
+          js number
+        </a></span> <span class="next"><a href="/blog/js-vue-observer-3.html">
+          Vue 响应式原理（三）
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.6a1c7d67.js" defer></script><script src="/assets/js/2.63e202d5.js" defer></script><script src="/assets/js/27.be5d5f2c.js" defer></script>
+  </body>
+</html>

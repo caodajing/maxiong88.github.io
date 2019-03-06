@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>构造函数与普通函数区别 | 雄大家</title>
+    <meta name="description" content="熊大熊二日志">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d26378bb.css" as="style"><link rel="preload" href="/assets/js/app.6a1c7d67.js" as="script"><link rel="preload" href="/assets/js/2.63e202d5.js" as="script"><link rel="preload" href="/assets/js/29.d65ee59a.js" as="script"><link rel="prefetch" href="/assets/js/10.45b3122b.js"><link rel="prefetch" href="/assets/js/11.ef1e40ed.js"><link rel="prefetch" href="/assets/js/12.fd10a6de.js"><link rel="prefetch" href="/assets/js/13.deeea89e.js"><link rel="prefetch" href="/assets/js/14.2750bbe8.js"><link rel="prefetch" href="/assets/js/15.3699038f.js"><link rel="prefetch" href="/assets/js/16.47b9f8b3.js"><link rel="prefetch" href="/assets/js/17.725f6bb8.js"><link rel="prefetch" href="/assets/js/18.b0157e81.js"><link rel="prefetch" href="/assets/js/19.6c67f5dc.js"><link rel="prefetch" href="/assets/js/20.0e515db8.js"><link rel="prefetch" href="/assets/js/21.43d7f922.js"><link rel="prefetch" href="/assets/js/22.dfea0c59.js"><link rel="prefetch" href="/assets/js/23.c3bc28d6.js"><link rel="prefetch" href="/assets/js/24.57db548b.js"><link rel="prefetch" href="/assets/js/25.e2e9ffd9.js"><link rel="prefetch" href="/assets/js/26.e61851e1.js"><link rel="prefetch" href="/assets/js/27.be5d5f2c.js"><link rel="prefetch" href="/assets/js/28.ef903b6a.js"><link rel="prefetch" href="/assets/js/3.018261d8.js"><link rel="prefetch" href="/assets/js/30.862d472d.js"><link rel="prefetch" href="/assets/js/31.a903b7be.js"><link rel="prefetch" href="/assets/js/32.17604038.js"><link rel="prefetch" href="/assets/js/33.b403c19c.js"><link rel="prefetch" href="/assets/js/34.2df7b623.js"><link rel="prefetch" href="/assets/js/35.04c1b42c.js"><link rel="prefetch" href="/assets/js/36.5775796d.js"><link rel="prefetch" href="/assets/js/37.6847ce80.js"><link rel="prefetch" href="/assets/js/38.956dd45b.js"><link rel="prefetch" href="/assets/js/39.d47fb572.js"><link rel="prefetch" href="/assets/js/4.539838e3.js"><link rel="prefetch" href="/assets/js/40.a460de13.js"><link rel="prefetch" href="/assets/js/41.5ad88ba8.js"><link rel="prefetch" href="/assets/js/42.a4740b36.js"><link rel="prefetch" href="/assets/js/43.22b59fb2.js"><link rel="prefetch" href="/assets/js/44.48fcb2a1.js"><link rel="prefetch" href="/assets/js/45.88b2df56.js"><link rel="prefetch" href="/assets/js/46.a4c14c43.js"><link rel="prefetch" href="/assets/js/47.ea4798bc.js"><link rel="prefetch" href="/assets/js/48.0cd6076d.js"><link rel="prefetch" href="/assets/js/49.13df7e3e.js"><link rel="prefetch" href="/assets/js/5.9f59a17f.js"><link rel="prefetch" href="/assets/js/50.6d65c345.js"><link rel="prefetch" href="/assets/js/51.06f54f5d.js"><link rel="prefetch" href="/assets/js/52.c91d91d2.js"><link rel="prefetch" href="/assets/js/53.de3c77b4.js"><link rel="prefetch" href="/assets/js/54.68e5267a.js"><link rel="prefetch" href="/assets/js/55.c852d2ba.js"><link rel="prefetch" href="/assets/js/56.d69fbe04.js"><link rel="prefetch" href="/assets/js/57.b45b29c6.js"><link rel="prefetch" href="/assets/js/58.69f6c5d4.js"><link rel="prefetch" href="/assets/js/59.43ab7236.js"><link rel="prefetch" href="/assets/js/6.04b98662.js"><link rel="prefetch" href="/assets/js/7.4446acf3.js"><link rel="prefetch" href="/assets/js/8.00ec34fe.js"><link rel="prefetch" href="/assets/js/9.a50c4a40.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d26378bb.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">雄大家</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">参考</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.h5anli.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  H5案例
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-weibo</a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-cms</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">MEME</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">参考</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.h5anli.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  H5案例
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-weibo</a></li><li class="dropdown-item"><!----> <a href="/blog/.html" class="nav-link">vue-cms</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">MEME</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>构造函数与普通函数区别</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/js-function-0.html#函数" class="sidebar-link">函数</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/js-function-0.html#构造函数" class="sidebar-link">构造函数</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/js-function-0.html#普通函数" class="sidebar-link">普通函数</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/js-function-0.html#区别" class="sidebar-link">区别</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/js-function-0.html#课外" class="sidebar-link">课外</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content default"><h2 id="函数"><a href="#函数" aria-hidden="true" class="header-anchor">#</a> 函数</h2> <p>函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。</p> <h2 id="构造函数"><a href="#构造函数" aria-hidden="true" class="header-anchor">#</a> 构造函数</h2> <p>需要使用new运算符初始化</p> <h2 id="普通函数"><a href="#普通函数" aria-hidden="true" class="header-anchor">#</a> 普通函数</h2> <p>不适用new运算符的函数</p> <h2 id="区别"><a href="#区别" aria-hidden="true" class="header-anchor">#</a> 区别</h2> <ol><li>构造函数使用new运算符调用；普通函数不使用new运算符调用；</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> p1 <span class="token operator">=</span> <span class="token function">Persion1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>2.构造函数内部可以使用this关键字；普通函数内部不建议使用this，因为这时候this指向的是window全局对象，这样无意间就会为window添加了一些全局变量或函数</p> <div class="language-bash extra-class"><pre class="language-bash"><code>2.1 在构造函数内部，this指向的是构造出来的新对象
+
+2.2 在普通函数内部，this指向的是window全局对象
+</code></pre></div><p>3.构造函数默认不用return返回值；普通函数一般都有return返回值</p> <div class="language-bash extra-class"><pre class="language-bash"><code>3.1 构造函数会默认返回this，也就是新的实例对象
+
+3.2 普通函数如果没有return值的话，返回undefined
+
+3.3 如果使用了return，那返回值会根据return值的类型而有所不同
+3.3.1 return的是五种简单数据类型：String,Number,Boolean,Null,Undefined的话，构造函数会忽略return的值，依然返回this对象；而普通函数会返回return后面的值
+<span class="token keyword">function</span> Otaku <span class="token punctuation">(</span>name, age<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this.strength <span class="token operator">=</span> 60<span class="token punctuation">;</span>
+    this.age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token string">'handsome boy'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+var person <span class="token operator">=</span> new Otaku<span class="token punctuation">(</span><span class="token string">'Kevin'</span>, <span class="token string">'18'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console.log<span class="token punctuation">(</span>person.name<span class="token punctuation">)</span> // undefined
+console.log<span class="token punctuation">(</span>person.habit<span class="token punctuation">)</span> // undefined
+console.log<span class="token punctuation">(</span>person.strength<span class="token punctuation">)</span> // 60
+console.log<span class="token punctuation">(</span>person.age<span class="token punctuation">)</span> // 18
+
+
+3.3.2 如果return的是引用类型：Array,Date,Object,Function,RegExp,Error的话，构造函数和普通函数都会返回return后面的值
+<span class="token keyword">function</span> Otaku <span class="token punctuation">(</span>name, age<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this.strength <span class="token operator">=</span> 60<span class="token punctuation">;</span>
+    this.age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        name: name,
+        habit: <span class="token string">'Games'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+var person <span class="token operator">=</span> new Otaku<span class="token punctuation">(</span><span class="token string">'Kevin'</span>, <span class="token string">'18'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console.log<span class="token punctuation">(</span>person.name<span class="token punctuation">)</span> // Kevin
+console.log<span class="token punctuation">(</span>person.habit<span class="token punctuation">)</span> // Games
+console.log<span class="token punctuation">(</span>person.strength<span class="token punctuation">)</span> // undefined
+console.log<span class="token punctuation">(</span>person.age<span class="token punctuation">)</span> // undefined
+
+
+</code></pre></div><p>4.构造函数首字母建议大写；普通函数首字母建议小写</p> <h3 id="课外"><a href="#课外" aria-hidden="true" class="header-anchor">#</a> 课外</h3> <p>new 做了什么</p> <div class="language-bash extra-class"><pre class="language-bash"><code>var obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 创建一个空对象obj
+
+obj.__proto__ <span class="token operator">=</span> co.prototype 将这个空对象的__proto__成员指向了构造函数对象的prototype成员对象
+
+co.call<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> 将构造函数的作用域赋给新对象，因此co对象中的this指向了新对象obj，然后再调用co函数。
+
+返回新对象 如果构造函数返回简单数据类型则返回新对象是obj、否则就是构造函数的返回值
+</code></pre></div><p>我都到一篇文章 用了一个很通俗易懂的 方法解释的，</p> <p>js 给java打了一个电话告诉了它的住址让他过来吃饭，java就知道了js地址，java到了js家里不管怎么改动家里的布局，js、java都在js的家里面</p> <p>引用类型的赋值其实是对象保存在栈区地址指针的赋值，所以两个变量指向同一个对象，任何的操作都会互相影响.</p> <p>参考资料</p> <p><a href="https://segmentfault.com/a/1190000008615288" target="_blank" rel="noopener noreferrer">https://segmentfault.com/a/1190000008615288<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/js-function-prototype.html" class="prev">
+          js原型
+        </a></span> <span class="next"><a href="/blog/js-exports.html">
+          export使用方法
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.6a1c7d67.js" defer></script><script src="/assets/js/2.63e202d5.js" defer></script><script src="/assets/js/29.d65ee59a.js" defer></script>
+  </body>
+</html>
